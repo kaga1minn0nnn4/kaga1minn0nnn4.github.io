@@ -237,6 +237,7 @@
                     <div class="slider-wrapper">
                         <img src="imgs/switch_bot1.jpg" alt="swbot 1">
                         <img src="imgs/switch_bot2.jpg" alt="swbot 2">
+                        <img src="imgs/switch_bot3.jpg" alt="swbot 3">
                     </div>
                     <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -279,6 +280,24 @@
                     <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
                     <div class="slider-wrapper">
                         <video src="imgs/robo2021.mp4" controls muted loop playsinline></video>
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">3輪オムニホイールロボット</h3>
+                    <p class="project-desc">
+                        SBCと深度カメラを搭載したオムニホイールロボットの設計製作を行った。
+                    </p>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <img src="imgs/robo.jpg" alt="robo1">
+                        <img src="imgs/robo_2.png" alt="robo2">
                     </div>
                     <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
                 </div>
@@ -354,19 +373,24 @@
     <script>
         document.querySelectorAll('.project-item').forEach(item => {
             const wrapper = item.querySelector('.slider-wrapper');
-            const slides = wrapper.querySelectorAll('img, iframe');
+            const slides = wrapper.querySelectorAll('img, iframe, video');
             const dotsContainer = item.querySelector('.dots-container');
             const prevBtn = item.querySelector('.prev-btn');
             const nextBtn = item.querySelector('.next-btn');
 
             let currentIndex = 0;
+            let autoPlayTimer = null;
+            const intervalTime = 3000; // 5秒ごとに切り替え
 
             // ドットの生成
             slides.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.classList.add('dot');
                 if (i === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => goToSlide(i));
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetTimer(); // 手動操作時にタイマーリセット
+                });
                 dotsContainer.appendChild(dot);
             });
 
@@ -385,15 +409,55 @@
                 updateDots();
             }
 
-            nextBtn.addEventListener('click', () => {
+            // 次のスライドへ（自動再生でも使用）
+            function nextSlide() {
                 currentIndex = (currentIndex + 1) % slides.length;
                 goToSlide(currentIndex);
+            }
+
+            // 前のスライドへ
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(currentIndex);
+            }
+
+            // 自動再生を開始する関数
+            function startTimer() {
+                stopTimer(); // 二重起動防止
+                autoPlayTimer = setInterval(nextSlide, intervalTime);
+            }
+
+            // 自動再生を停止する関数
+            function stopTimer() {
+                if (autoPlayTimer) {
+                    clearInterval(autoPlayTimer);
+                    autoPlayTimer = null;
+                }
+            }
+
+            // 手動操作したときにタイマーをリセットする
+            function resetTimer() {
+                stopTimer();
+                startTimer();
+            }
+
+            // ボタンクリックイベント
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetTimer();
             });
 
             prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-                goToSlide(currentIndex);
+                prevSlide();
+                resetTimer();
             });
+
+            // マウスがスライダーの上にあるときは停止、離れたら再開（PC向け）
+            item.addEventListener('mouseenter', stopTimer);
+            item.addEventListener('mouseleave', startTimer);
+
+            // 初期起動
+            startTimer();
 
             // ウィンドウサイズ変更時に位置を補正
             window.addEventListener('resize', () => goToSlide(currentIndex));
