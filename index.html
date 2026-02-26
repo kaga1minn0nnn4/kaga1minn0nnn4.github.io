@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | My Name</title>
+    <title>Daito Tatesawa | Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2d3436;
-            --accent-color: #0984e3;
-            --bg-color: #f5f6fa;
+            --accent-color: #00a8ff;
+            --bg-color: #f9f9f9;
             --text-color: #2d3436;
+            --card-bg: #ffffff;
         }
 
         body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
             color: var(--text-color);
             background-color: var(--bg-color);
-        }
-
-        header {
-            background: #fff;
-            padding: 2rem 1rem;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .container {
@@ -34,103 +28,187 @@
             padding: 2rem;
         }
 
-        /* プロフィール部分 */
-        .profile {
+        /* Profile Section */
+        header {
             text-align: center;
-            margin-bottom: 3rem;
+            padding: 4rem 1rem;
+            background: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .profile-img {
             width: 180px;
             height: 180px;
-            border-radius: 50%; /* 写真を丸く切り抜き */
+            border-radius: 50%; /* 丸く切り抜き */
             object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 1rem;
+            border: 5px solid var(--bg-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
         }
 
-        /* セクション共通 */
+        h1 { margin: 0.5rem 0; font-size: 2.2rem; }
+        .affiliation { color: #636e72; font-size: 1.1rem; margin-bottom: 1rem; }
+
+        /* Sections */
         section {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
         }
 
         h2 {
-            border-bottom: 2px solid var(--accent-color);
-            display: inline-block;
+            border-left: 5px solid var(--accent-color);
+            padding-left: 1rem;
             margin-bottom: 1.5rem;
-            padding-bottom: 0.3rem;
+            font-size: 1.6rem;
+            color: var(--primary-color);
         }
 
-        /* スキルリスト */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            text-align: center;
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .skill-item {
-            background: var(--bg-color);
-            padding: 1rem;
-            border-radius: 8px;
-            font-weight: bold;
+        .skill-tag {
+            background: #f0f2f5;
+            color: #444;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        /* 制作物一覧 */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+        /* Lists */
+        .timeline {
+            list-style: none;
+            padding: 0;
         }
 
-        .project-card {
-            border: 1px solid #eee;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
+        .timeline-item {
+            display: flex;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid #f1f1f1;
+            padding-bottom: 0.8rem;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
+        .timeline-item:last-child { border-bottom: none; }
 
-        .project-info {
-            padding: 1rem;
-        }
-
-        .project-tags {
-            font-size: 0.8rem;
+        .date {
+            min-width: 220px;
             color: var(--accent-color);
-            margin-bottom: 0.5rem;
-            display: block;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .content { flex: 1; }
+        .status-badge {
+            font-size: 0.75rem;
+            background: #eee;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
         }
 
         footer {
             text-align: center;
-            padding: 2rem;
-            color: #636e72;
+            padding: 3rem;
+            color: #b2bec3;
+            font-size: 0.9rem;
         }
 
-        /* レスポンシブ対応 */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .timeline-item { flex-direction: column; }
+            .date { margin-bottom: 0.3rem; min-width: auto; }
             .container { padding: 1rem; }
+            section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Portfolio</h1>
+        <img src="profile.jpg" alt="Daito Tatesawa" class="profile-img">
+        <h1>舘澤 大門 / Daito Tatesawa</h1>
+        <p class="affiliation">東京農工大学 工学部 知能情報システム工学科 学部4年</p>
     </header>
 
     <div class="container">
-        <section class="profile">
-            <img src="profile.jpg" alt="Your Name" class="profile-img">
-            <h2>あなたの名前 / Your Name</h2>
-            <p>ここに簡単な略歴を記載します。例：大学でロボット工学を専攻し、現在はSTM32を用いた組み込み開発やPythonによるデータ解析を行っています。</p>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                中学生の頃、ロボカップに参加したことがきっかけでものづくりが好きになりました。高専に進学後はロボット研究同好会に所属し、高専ロボコンに出場。新型コロナウイルスの影響で活動が制限される中、ロボットの制御プログラム作成や回路作成に注力しました。
+            </p>
+            <p>
+                大学編入後はロボット研究会に所属し、NHK学生ロボコンでの優勝を目指した機体開発に従事。現在は大学の研究室で深層学習や画像処理の研究を行う傍ら、次なるロボコンに向けた開発も継続しています。
+            </p>
         </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <span class="skill-tag">C/C++</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Git / GitHub</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">GCP (BigQuery, Cloud Run, Firestore)</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">PyTorch / Lightning</span>
+                <span class="skill-tag">回路設計 (Altium, KiCAD, Eagle)</span>
+                <span class="skill-tag">マイコン開発 (STM32, PIC, ESP32, Arduino)</span>
+                <span class="skill-tag">ROS / ROS2</span>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="date">2026.04 ~</span>
+                    <span class="content">国立大学法人東京農工大学大学院 先進学際科学府 先進学際科学専攻<span class="status-badge">進学予定</span></span>
+                </li>
+                <li class="timeline-item">
+                    <span class="date">2024.04 ~ 現在</span>
+                    <span class="content">国立大学法人東京農工大学 工学部 知能情報システム工学科 数理情報工学コース</span>
+                </li>
+                <li class="timeline-item">
+                    <span class="date">2019.04 ~ 2024.03</span>
+                    <span class="content">東京都立産業技術高等専門学校 情報通信工学コース</span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="experience">
+            <h2>Experience & Awards</h2>
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <span class="date">2025.06</span>
+                    <span class="content">NHK学生ロボコン2025 ベスト4・デザイン賞</span>
+                </li>
+                <li class="timeline-item">
+                    <span class="date">2024.09</span>
+                    <span class="content">東海地区交流ロボコン2024 特別賞</span>
+                </li>
+                <li class="timeline-item">
+                    <span class="date">2023.11 ~ 2026.03</span>
+                    <span class="content">rakumo株式会社 プロダクト部（エンジニアアルバイト）</span>
+                </li>
+                <li class="timeline-item">
+                    <span class="date">2021.10</span>
+                    <span class="content">NHK高専ロボコン2021 関東甲信越地区大会 特別賞</span>
+                </li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Daito Tatesawa. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
