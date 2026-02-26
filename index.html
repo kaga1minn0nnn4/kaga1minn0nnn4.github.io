@@ -115,6 +115,14 @@
             .timeline-item { flex-direction: column; }
             .date { min-width: auto; margin-bottom: 0.3rem; }
         }
+        @media (max-width: 768px) {
+            .research-content {
+                flex-direction: column; /* スマホでは縦並び */
+            }
+            .research-image {
+                max-width: 100% !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -165,7 +173,7 @@
                 </li>
                 <li class="timeline-item">
                     <span class="date">2019.04 ~ 2024.03</span>
-                    <span class="content">東京都立産業技術高等専門学校 情報通信工学コース</span>
+                    <span class="content">東京都立産業技術高等専門学校 ものづくり工学科 情報通信工学コース</span>
                 </li>
             </ul>
         </section>
@@ -192,7 +200,27 @@
             </ul>
         </section>
 
-<section id="projects">
+        <section id="research">
+            <h2>Research</h2>
+            <div class="research-item">
+                <h3 class="research-title">複素ニューラルネットワークを援用した反復的位相回復</h3>
+                <div class="research-text">
+                    <p>
+                        大学の研究室ではタイコグラフィーというイメージング技術についての研究を行っています。
+                        卒論では、従来の手法に深層学習ベースのデノイザーを組み込むといった手法に関する研究を行いました。
+                    </p>
+                    <p style="font-size: 0.9rem; color: #636e72;">
+                        キーワード：Deep Learning, Computer Vision, Phase Retrieval, PyTorch Lightning
+                    </p>
+                </div>
+
+                <div class="research-image" style="margin-top: 20px; width: 100%;">
+                    <img src="imgs/graduation.png" alt="卒業論文概要図" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); object-fit: contain;">
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
             <h2>Projects</h2>
 
             <div class="project-item">
