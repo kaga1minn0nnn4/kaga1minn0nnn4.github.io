@@ -16,124 +16,111 @@
 
         body {
             font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-            line-height: 1.7;
-            margin: 0;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+            line-height: 1.7; margin: 0; color: var(--text-color); background-color: var(--bg-color);
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
 
-        /* Profile Section */
-        header {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: white;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%; /* 丸く切り抜き */
-            object-fit: cover;
-            border: 5px solid var(--bg-color);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
-        }
-
+        /* Profile & Common Sections */
+        header { text-align: center; padding: 4rem 1rem; background: white; margin-bottom: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 5px solid var(--bg-color); box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
         h1 { margin: 0.5rem 0; font-size: 2.2rem; }
-        .affiliation { color: #636e72; font-size: 1.1rem; margin-bottom: 1rem; }
+        .affiliation { color: #636e72; font-size: 1.1rem; }
 
-        /* Sections */
-        section {
-            background: var(--card-bg);
-            padding: 2.5rem;
-            border-radius: 15px;
-            margin-bottom: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+        section { background: var(--card-bg); padding: 2.5rem; border-radius: 15px; margin-bottom: 2.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+        h2 { border-left: 5px solid var(--accent-color); padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.6rem; }
+
+        .skills-container { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: #f0f2f5; color: #444; padding: 6px 14px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+
+        .timeline { list-style: none; padding: 0; }
+        .timeline-item { display: flex; margin-bottom: 1.2rem; border-bottom: 1px solid #f1f1f1; padding-bottom: 0.8rem; }
+        .date { min-width: 200px; color: var(--accent-color); font-weight: bold; }
+        .status-badge { font-size: 0.75rem; background: #eee; padding: 2px 8px; border-radius: 4px; margin-left: 8px; }
+
+        /* --- 制作物スライダー (Arrow & Dots) --- */
+        .project-item { margin-bottom: 4rem; }
+        .project-header { margin-bottom: 1rem; }
+        .project-title { font-size: 1.5rem; font-weight: bold; margin: 0; }
+        .project-desc { font-size: 0.95rem; color: #636e72; margin: 0.5rem 0; }
+        .project-links a { font-size: 0.85rem; color: var(--accent-color); text-decoration: none; margin-right: 15px; font-weight: bold; }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .slider-wrapper {
+            display: flex;       /* 子要素を横並びにする */
+            overflow: hidden;    /* はみ出た分を隠す */
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            scroll-behavior: smooth;
         }
 
-        h2 {
-            border-left: 5px solid var(--accent-color);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-            color: var(--primary-color);
+        /* 2枚目以降も正しく幅を持つように設定 */
+        .slider-wrapper img,
+        .slider-wrapper video,
+        .slider-wrapper iframe {
+            min-width: 100%;    /* これが重要！ */
+            max-width: 100%;
+            height: 100%;
+            object-fit: contain;
+            flex-shrink: 0;     /* 子要素が縮まないように固定 */
         }
 
-        /* Skills */
-        .skills-container {
+        /* 矢印ボタン */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
         }
+        .nav-btn:hover { background: rgba(255,255,255,1); }
+        .prev-btn { left: 15px; }
+        .next-btn { right: 15px; }
 
-        .skill-tag {
-            background: #f0f2f5;
-            color: #444;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        /* Lists */
-        .timeline {
-            list-style: none;
-            padding: 0;
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 1.2rem;
-            border-bottom: 1px solid #f1f1f1;
-            padding-bottom: 0.8rem;
-        }
-
-        .timeline-item:last-child { border-bottom: none; }
-
-        .date {
-            min-width: 220px;
-            color: var(--accent-color);
-            font-weight: bold;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .content { flex: 1; }
-        .status-badge {
-            font-size: 0.75rem;
-            background: #eee;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-
-        footer {
+        /* ドットインジケーター */
+        .dots-container {
             text-align: center;
-            padding: 3rem;
-            color: #b2bec3;
-            font-size: 0.9rem;
+            margin-top: 10px;
         }
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .dot.active { background: var(--accent-color); }
+
+        footer { text-align: center; padding: 3rem; color: #b2bec3; }
 
         @media (max-width: 768px) {
             .timeline-item { flex-direction: column; }
-            .date { margin-bottom: 0.3rem; min-width: auto; }
-            .container { padding: 1rem; }
-            section { padding: 1.5rem; }
+            .date { min-width: auto; margin-bottom: 0.3rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="profile.JPG" alt="Daito Tatesawa" class="profile-img">
+        <img src="imgs/profile.jpg" alt="Daito Tatesawa" class="profile-img">
         <h1>舘澤 大門 / Daito Tatesawa</h1>
         <p class="affiliation">東京農工大学 工学部 知能情報システム工学科 学部4年</p>
     </header>
@@ -158,7 +145,7 @@
                 <span class="skill-tag">Docker</span>
                 <span class="skill-tag">GCP (BigQuery, Cloud Run, Firestore)</span>
                 <span class="skill-tag">OpenCV</span>
-                <span class="skill-tag">PyTorch / Lightning</span>
+                <span class="skill-tag">PyTorch / PyTorch Lightning</span>
                 <span class="skill-tag">回路設計 (Altium, KiCAD, Eagle)</span>
                 <span class="skill-tag">マイコン開発 (STM32, PIC, ESP32, Arduino)</span>
                 <span class="skill-tag">ROS / ROS2</span>
@@ -204,11 +191,163 @@
                 </li>
             </ul>
         </section>
+
+<section id="projects">
+            <h2>Projects</h2>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">Switch Bot</h3>
+                    <p class="project-desc">手を叩いた音に反応して照明をON/OFFしてくれるスイッチボット</p>
+                    <div class="project-links">
+                        <a href="https://github.com/kaga1minn0nnn4/wifi_node_pcb" target="_blank">基板データ: wifi_node_pcb</a>
+                        <a href="https://github.com/kaga1minn0nnn4/wifi_node_fw" target="_blank">ESP側: wifi_node_fw</a>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <img src="imgs/switch_bot1.jpg" alt="swbot 1">
+                        <img src="imgs/switch_bot2.jpg" alt="swbot 2">
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">NHK学生ロボコン2025</h3>
+                    <p class="project-desc">
+                        主にロボット内に搭載されている回路の設計製作 <br>
+                        EtherCATを用いたロボット内通信システムの開発、基板のファームウェア開発、ROS2での対基板通信部分などを担当した。
+                    </p>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <img src="imgs/robocon0.jpg" alt="robo0">
+                        <img src="imgs/robocon1.jpg" alt="robo1">
+                        <img src="imgs/robocon2.jpg" alt="robo2">
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">小型BLDCモータードライバの開発</h3>
+                    <p class="project-desc">
+                        CANFD通信で制御できる小型BLDCモータードライバの開発を行った。
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/kaga1minn0nnn4/X610" target="_blank">ファームウェア: X610 (作りかけ) </a>
+                        <a href="https://github.com/kaga1minn0nnn4/X610_PCB" target="_blank">基板データ: X610_PCB</a>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <video src="imgs/x610_1.mp4" controls muted loop playsinline></video>
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">Ethernet to CANFD基板の開発</h3>
+                    <p class="project-desc">
+                        ロボコンで使えるようなEthernet経由でCANFDバスに指令をパスできるような基板を開発した
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/kaga1minn0nnn4/EtoC_PCB" target="_blank">基板データ: EtoC_PCB</a>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <img src="imgs/etoc.jpg" alt="etoc">
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+            <div class="project-item">
+                <div class="project-header">
+                    <h3 class="project-title">ターミナル上でできる対戦型陣取りゲームの開発</h3>
+                    <p class="project-desc">
+                        ランダム生成されたマップ内を動き回りながら塗りつぶしていくゲームの開発 (Python)
+                    </p>
+                    <div class="project-links">
+                        <a href="https://github.com/kaga1minn0nnn4/TurfWarServer" target="_blank"></a>
+                    </div>
+                </div>
+                <div class="slider-container">
+                    <button class="nav-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <div class="slider-wrapper">
+                        <video src="imgs/turf.mp4" controls muted loop playsinline></video>
+                    </div>
+                    <button class="nav-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="dots-container"></div>
+            </div>
+
+        </section>
     </div>
 
-    <footer>
-        <p>&copy; 2026 Daito Tatesawa. All Rights Reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 Daito Tatesawa. All Rights Reserved.</p></footer>
 
+    <script>
+        document.querySelectorAll('.project-item').forEach(item => {
+            const wrapper = item.querySelector('.slider-wrapper');
+            const slides = wrapper.querySelectorAll('img, iframe');
+            const dotsContainer = item.querySelector('.dots-container');
+            const prevBtn = item.querySelector('.prev-btn');
+            const nextBtn = item.querySelector('.next-btn');
+
+            let currentIndex = 0;
+
+            // ドットの生成
+            slides.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            });
+
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            function updateDots() {
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            function goToSlide(index) {
+                currentIndex = index;
+                const width = wrapper.clientWidth;
+                wrapper.scrollTo({ left: width * currentIndex, behavior: 'smooth' });
+                updateDots();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                goToSlide(currentIndex);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                goToSlide(currentIndex);
+            });
+
+            // ウィンドウサイズ変更時に位置を補正
+            window.addEventListener('resize', () => goToSlide(currentIndex));
+        });
+    </script>
 </body>
 </html>
